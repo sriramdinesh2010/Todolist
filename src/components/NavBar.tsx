@@ -2,19 +2,27 @@ import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Logo from "../assets/task.png";
+// import Logo from "../assets/task.png";
+import { LuListTodo } from "react-icons/lu";
+
 const NavBar = () => {
   return (
-    <AppBar position="static" color="transparent">
+    <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-          <img src={Logo} width={40} height={40} style={{ margin: "10px" }} />
+          {/* <img src={Logo} width={40} height={40} style={{ margin: "10px" }} /> */}
+          <LuListTodo
+            fontSize={40}
+            style={{
+              marginRight: "15px",
+            }}
+          />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },

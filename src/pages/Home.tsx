@@ -25,6 +25,7 @@ import {
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { TodoData } from "../data/TodoData";
 import { Chip } from "@mui/material";
 
@@ -40,6 +41,9 @@ const Home = () => {
   const [filter, setFilter] = useState<string>("all");
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [taskToDelete, setTaskToDelete] = useState<number | null>(null);
+  const [editTaskId, setEditTaskId] = useState<number | null>(null);
+  const [editTaskText, setEditTaskText] = useState<string>("");
+
   const addTask = () => {
     if (newTask.trim()) {
       const newTaskItem = { id: Date.now(), text: newTask, completed: false };
@@ -74,14 +78,36 @@ const Home = () => {
     setOpenDialog(false);
   };
 
+  const handleEditClick = (task: Task) => {
+    setEditTaskId(task.id);
+    setEditTaskText(task.text);
+  };
+
+  const saveEdit = () => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === editTaskId ? { ...task, text: editTaskText } : task
+      )
+    );
+    setEditTaskId(null);
+    setEditTaskText("");
+  };
+
+  const cancelEdit = () => {
+    setEditTaskId(null);
+    setEditTaskText("");
+  };
+
   const filteredTasks = tasks.filter((task) => {
     if (filter === "completed") return task.completed;
     if (filter === "incomplete") return !task.completed;
     return true;
   });
+
   const statusColor = (completed: boolean) => {
     return completed ? "success" : "error"; // MUI colors for success (green) and error (red)
   };
+
   return (
     <Box
       component={Paper}
@@ -92,18 +118,18 @@ const Home = () => {
         m: { xs: 2, md: 3 },
       }}
     >
-      <Typography gutterBottom variant="h5" fontWeight={400} mt={3}>
-        Create New Task
-      </Typography>
       <Grid container spacing={2}>
+        {/* Stack the text field and button vertically on small devices */}
         <Grid item xs={12} sm={10} md={10} lg={10} xl={8}>
           <Box>
             <TextField
               fullWidth
-              label="New Task"
+              placeholder="Create New Task"
+              required
               value={newTask}
               onChange={(e) => setNewTask(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && addTask()}
+              size="small" // Use small size for compactness
             />
           </Box>
         </Grid>
@@ -116,26 +142,35 @@ const Home = () => {
           xl={2}
           sx={{
             display: "flex",
-            justifyContent: "center",
+            justifyContent: { xs: "flex-start", sm: "center" },
             alignItems: "center",
+            mt: { xs: 2, sm: 0 }, // Add margin-top on small devices for vertical spacing
           }}
         >
           <Button
-            variant="outlined"
+            variant="contained"
+            color="success"
             startIcon={<AddCircleOutlineIcon />}
             onClick={addTask}
             sx={{
-              height: { xs: 48, md: 56 },
+              height: { xs: 40, md: 39 }, // Adjust height for smaller devices
               width: "100%",
+              fontSize: { xs: "0.8rem", md: "1rem" }, // Adjust font size
             }}
           >
-            ADD Item
+            Add Task
           </Button>
         </Grid>
         <Grid item xs={12} md={12} lg={12} xl={12}>
           <Grid container spacing={2}>
             <Grid item xs={6} md={6} lg={6} xl={6}>
-              <Typography gutterBottom variant="h5" fontWeight={400} mt={3}>
+              <Typography
+                gutterBottom
+                variant="h6"
+                fontWeight={400}
+                mt={3}
+                sx={{ fontSize: { xs: "1rem", md: "1.25rem" } }} // Adjust font size
+              >
                 Task List
               </Typography>
             </Grid>
@@ -151,7 +186,11 @@ const Home = () => {
                 alignItems: "center",
               }}
             >
-              <Typography gutterBottom variant="h6">
+              <Typography
+                gutterBottom
+                variant="h6"
+                sx={{ fontSize: { xs: "0.9rem", md: "1.1rem" } }} // Adjust font size
+              >
                 Status:
               </Typography>
               <FormControl
@@ -165,6 +204,7 @@ const Home = () => {
                   labelId="filter-label"
                   value={filter}
                   onChange={(e) => setFilter(e.target.value)}
+                  size="small" // Make the select component smaller
                 >
                   <MenuItem value="all">All</MenuItem>
                   <MenuItem value="completed">Completed</MenuItem>
@@ -193,28 +233,61 @@ const Home = () => {
                             edge="end"
                             aria-label="toggle"
                             onClick={() => toggleTaskCompletion(task.id)}
+                            size="small"
                           >
                             <Checkbox checked={task.completed} />
                           </IconButton>
                         </TableCell>
                         <TableCell align="center" component="th" scope="row">
-                          {task.text}
+                          {editTaskId === task.id ? (
+                            <TextField
+                              fullWidth
+                              value={editTaskText}
+                              onChange={(e) => setEditTaskText(e.target.value)}
+                              size="small" // Smaller text field for editing
+                            />
+                          ) : (
+                            task.text
+                          )}
                         </TableCell>
                         <TableCell align="center">
                           <Chip
                             label={task.completed ? "Completed" : "Incomplete"}
                             color={statusColor(task.completed)}
                             variant="outlined"
+                            size="small" // Smaller chip size
                           />
                         </TableCell>
                         <TableCell align="center">
-                          <IconButton
-                            edge="end"
-                            aria-label="delete"
-                            onClick={() => handleDeleteClick(task.id)}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
+                          {editTaskId === task.id ? (
+                            <>
+                              <Button onClick={saveEdit} size="small">
+                                Save
+                              </Button>
+                              <Button onClick={cancelEdit} size="small">
+                                Cancel
+                              </Button>
+                            </>
+                          ) : (
+                            <>
+                              <IconButton
+                                edge="end"
+                                aria-label="edit"
+                                onClick={() => handleEditClick(task)}
+                                size="small"
+                              >
+                                <EditIcon />
+                              </IconButton>
+                              <IconButton
+                                edge="end"
+                                aria-label="delete"
+                                onClick={() => handleDeleteClick(task.id)}
+                                size="small"
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                            </>
+                          )}
                         </TableCell>
                       </TableRow>
                     ))

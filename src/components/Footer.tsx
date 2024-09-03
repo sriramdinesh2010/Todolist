@@ -7,14 +7,14 @@ const Footer = () => {
       sx={{
         py: 2,
         mt: 10,
-        backgroundColor: "transparent",
+        backgroundColor: "primary",
         textAlign: "center",
         boxShadow: "0 -1px 5px rgba(0, 0, 0, 0.1)",
       }}
     >
       <Container maxWidth="lg">
         <Typography variant="body2">
-          TodoList © {new Date().getFullYear()} TodoList
+          © {new Date().getFullYear()} TodoList
         </Typography>
       </Container>
     </Box>
