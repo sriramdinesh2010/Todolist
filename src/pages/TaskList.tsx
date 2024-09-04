@@ -6,10 +6,11 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Typography,
 } from "@mui/material";
 import TaskItem from "./TaskItem";
 import { Task } from "../data/TodoData"; // Import Task type
-
+import NoList from "../assets/nolist.svg";
 interface TaskListProps {
   tasks: Task[];
   toggleTaskCompletion: (id: number) => void;
@@ -31,19 +32,19 @@ const TaskList = ({
             <TableCell align="center"></TableCell>
             <TableCell
               align="center"
-              sx={{ fontWeight: "bold", padding: "12px" }}
+              sx={{ fontWeight: "bold", padding: "12px", color: "#1975d1" }}
             >
               TASK
             </TableCell>
             <TableCell
               align="center"
-              sx={{ fontWeight: "bold", padding: "12px" }}
+              sx={{ fontWeight: "bold", padding: "12px", color: "#1975d1" }}
             >
               STATUS
             </TableCell>
             <TableCell
               align="center"
-              sx={{ fontWeight: "bold", padding: "12px" }}
+              sx={{ fontWeight: "bold", padding: "12px", color: "#1975d1" }}
             >
               ACTIONS
             </TableCell>
@@ -63,7 +64,10 @@ const TaskList = ({
           ) : (
             <TableRow>
               <TableCell align="center" colSpan={4}>
-                No tasks found.
+                <img src={NoList} width={200} height={300} />
+                <Typography variant="h6" gutterBottom>
+                  No Task Found
+                </Typography>
               </TableCell>
             </TableRow>
           )}

@@ -6,6 +6,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
+import FilterListIcon from "@mui/icons-material/FilterList";
 
 interface TaskFilterProps {
   filter: string;
@@ -19,11 +20,11 @@ const TaskFilter = ({ filter, setFilter }: TaskFilterProps) => {
         <Typography
           gutterBottom
           variant="h6"
-          fontWeight={400}
-          mt={3}
+          fontWeight={700}
+          color="primary"
           sx={{ fontSize: { xs: "1rem", md: "1.25rem" } }}
         >
-          Task List
+          TASK LIST
         </Typography>
       </Grid>
       <Grid
@@ -38,11 +39,18 @@ const TaskFilter = ({ filter, setFilter }: TaskFilterProps) => {
         <Typography
           gutterBottom
           variant="h6"
-          sx={{ fontSize: { xs: "0.9rem", md: "1.1rem" } }}
+          fontWeight={300}
+          sx={{
+            fontSize: { xs: "0.9rem", md: "1.1rem" },
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          Status:
+          <FilterListIcon sx={{ mr: 0.5 }} />
+          Filter
         </Typography>
-        <FormControl fullWidth sx={{ m: 2 }}>
+        <FormControl fullWidth sx={{ ml: 2 }}>
           <InputLabel id="filter-label"></InputLabel>
           <Select
             labelId="filter-label"

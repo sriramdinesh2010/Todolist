@@ -82,6 +82,11 @@ const Home = () => {
     setEditTaskText("");
     setOpenEditDialog(false);
   };
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "completed") return task.completed;
+    if (filter === "incomplete") return !task.completed;
+    return true; // "all" case
+  });
 
   return (
     <Box
@@ -101,12 +106,12 @@ const Home = () => {
             addTask={addTask}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ mt: 3 }}>
           <TaskFilter filter={filter} setFilter={setFilter} />
         </Grid>
         <Grid item xs={12}>
           <TaskList
-            tasks={tasks}
+            tasks={filteredTasks} // Pass filtered tasks to TaskList
             toggleTaskCompletion={toggleTaskCompletion}
             handleEditClick={handleEditClick}
             handleDeleteClick={handleDeleteClick}

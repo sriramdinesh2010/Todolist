@@ -27,17 +27,17 @@ const TaskItem = ({
 
   return (
     <TableRow>
-      <TableCell align="center" padding="checkbox">
+      <TableCell padding="checkbox">
         <IconButton
           edge="end"
           aria-label="toggle"
           onClick={() => toggleTaskCompletion(task.id)}
           size="small"
         >
-          <Checkbox checked={task.completed} />
+          <Checkbox checked={task.completed} color="success" />
         </IconButton>
       </TableCell>
-      <TableCell align="center" sx={{ padding: "12px" }}>
+      <TableCell align="left" sx={{ padding: "12px" }}>
         {task.text}
       </TableCell>
       <TableCell align="center" sx={{ padding: "12px" }}>
@@ -48,18 +48,25 @@ const TaskItem = ({
           size="small"
         />
       </TableCell>
-      <TableCell align="center" sx={{ padding: "12px" }}>
-        <Tooltip title="Edit">
+      <TableCell
+        align="left"
+        sx={{
+          padding: "12px",
+          display: "flex",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <Tooltip title="Edit" placement="right-start">
           <IconButton
             edge="end"
             aria-label="edit"
             onClick={() => handleEditClick(task)}
             size="large"
           >
-            <EditIcon color="success" />
+            <EditIcon color="inherit" />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Delete">
+        <Tooltip title="Delete" placement="right-start">
           <IconButton
             edge="end"
             aria-label="delete"
