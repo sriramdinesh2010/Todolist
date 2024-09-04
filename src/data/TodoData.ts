@@ -1,3 +1,11 @@
+export interface Task {
+  id: number;
+  text: string;
+  completed: boolean;
+  dueDate?: string; // Optional field if tasks can have due dates
+  priority?: string; // Optional field if tasks can have priority levels
+}
+
 export const TodoData = [
   {
     id: 1,
