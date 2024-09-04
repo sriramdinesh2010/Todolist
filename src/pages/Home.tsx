@@ -96,6 +96,7 @@ const Home = () => {
         height: "auto",
         p: { xs: 2, md: 3 },
         m: { xs: 2, md: 3 },
+        pb: { xs: 10, md: 10, lg: 10, xl: 10 },
       }}
     >
       <Grid container spacing={2}>

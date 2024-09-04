@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField } from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 interface TaskInputProps {
@@ -10,11 +10,22 @@ interface TaskInputProps {
 const TaskInput = ({ newTask, setNewTask, addTask }: TaskInputProps) => {
   return (
     <Grid container spacing={2}>
+      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+        <Typography
+          variant="h5"
+          color="info"
+          gutterBottom
+          fontWeight={"bold"}
+          sx={{ fontSize: { xs: "1rem", md: "1.25rem" } }}
+        >
+          CREATE TASK
+        </Typography>
+      </Grid>
       <Grid item xs={12} sm={10} md={10} lg={10} xl={8}>
         <Box>
           <TextField
             fullWidth
-            placeholder="Create New Task"
+            placeholder="Create Task"
             required
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
@@ -39,13 +50,13 @@ const TaskInput = ({ newTask, setNewTask, addTask }: TaskInputProps) => {
       >
         <Button
           variant="outlined"
+          color="info"
           startIcon={<AddCircleOutlineIcon />}
           onClick={addTask}
           sx={{
             height: { xs: 40, md: 39 },
             width: "100%",
             fontSize: { xs: "0.8rem", md: "0.8rem" },
-            textTransform: "none",
           }}
         >
           Add Task

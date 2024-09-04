@@ -2,21 +2,18 @@ import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-// import Logo from "../assets/task.png";
-import { LuListTodo } from "react-icons/lu";
+
+import { TbCheckbox } from "react-icons/tb";
 
 const NavBar = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="info">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-          {/* <img src={Logo} width={40} height={40} style={{ margin: "10px" }} /> */}
-          <LuListTodo
-            fontSize={40}
-            style={{
-              marginRight: "15px",
-            }}
+          <TbCheckbox
+            fontSize={28}
+            fontWeight={900}
+            style={{ margin: "10px" }}
           />
           <Typography
             variant="h6"
@@ -51,7 +48,7 @@ const NavBar = () => {
               textDecoration: "none",
             }}
           >
-            Todo List
+            TODO LIST
           </Typography>
         </Toolbar>
       </Container>

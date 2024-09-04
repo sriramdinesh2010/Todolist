@@ -8,9 +8,10 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import TaskItem from "./TaskItem";
+import TaskItem, { CustomTableCell, CustomTableRow } from "./TaskItem";
 import { Task } from "../data/TodoData"; // Import Task type
 import NoList from "../assets/nolist.svg";
+
 interface TaskListProps {
   tasks: Task[];
   toggleTaskCompletion: (id: number) => void;
@@ -25,26 +26,31 @@ const TaskList = ({
   handleDeleteClick,
 }: TaskListProps) => {
   return (
-    <TableContainer component={Paper} style={{ marginTop: 20 }}>
+    <TableContainer component={Paper}>
       <Table>
-        <TableHead>
+        <TableHead
+          sx={{
+            backgroundColor: "#0289d1",
+            Color: "#FFF",
+          }}
+        >
           <TableRow>
             <TableCell align="center"></TableCell>
             <TableCell
               align="center"
-              sx={{ fontWeight: "bold", padding: "12px", color: "#1975d1" }}
+              sx={{ fontWeight: "bold", padding: "12px" }}
             >
               TASK
             </TableCell>
             <TableCell
               align="center"
-              sx={{ fontWeight: "bold", padding: "12px", color: "#1975d1" }}
+              sx={{ fontWeight: "bold", padding: "12px" }}
             >
               STATUS
             </TableCell>
             <TableCell
               align="center"
-              sx={{ fontWeight: "bold", padding: "12px", color: "#1975d1" }}
+              sx={{ fontWeight: "bold", padding: "12px" }}
             >
               ACTIONS
             </TableCell>
@@ -62,14 +68,14 @@ const TaskList = ({
               />
             ))
           ) : (
-            <TableRow>
-              <TableCell align="center" colSpan={4}>
+            <CustomTableRow>
+              <CustomTableCell align="center" colSpan={4}>
                 <img src={NoList} width={200} height={300} />
                 <Typography variant="h6" gutterBottom>
                   No Task Found
                 </Typography>
-              </TableCell>
-            </TableRow>
+              </CustomTableCell>
+            </CustomTableRow>
           )}
         </TableBody>
       </Table>

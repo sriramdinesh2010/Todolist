@@ -9,31 +9,21 @@ export interface Task {
 export const TodoData = [
   {
     id: 1,
-    text: "Milk",
-    completed: true,
-  },
-  {
-    id: 2,
-    text: "Egg",
-    completed: true,
-  },
-  {
-    id: 3,
-    text: "Pay current Bill",
+    text: "Pay Bill",
     completed: false,
   },
   {
-    id: 4,
+    id: 2,
     text: "Water Refill",
     completed: true,
   },
   {
-    id: 5,
+    id: 3,
     text: "Walking",
     completed: true,
   },
   {
-    id: 6,
+    id: 4,
     text: "Book Reading",
     completed: false,
   },

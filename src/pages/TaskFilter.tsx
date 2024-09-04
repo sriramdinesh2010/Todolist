@@ -4,6 +4,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -19,9 +20,10 @@ const TaskFilter = ({ filter, setFilter }: TaskFilterProps) => {
       <Grid item xs={6}>
         <Typography
           gutterBottom
-          variant="h6"
+          variant="h5"
+          color="info"
           fontWeight={700}
-          color="primary"
+          ml={1}
           sx={{ fontSize: { xs: "1rem", md: "1.25rem" } }}
         >
           TASK LIST
@@ -36,20 +38,9 @@ const TaskFilter = ({ filter, setFilter }: TaskFilterProps) => {
           alignItems: "center",
         }}
       >
-        <Typography
-          gutterBottom
-          variant="h6"
-          fontWeight={300}
-          sx={{
-            fontSize: { xs: "0.9rem", md: "1.1rem" },
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <FilterListIcon sx={{ mr: 0.5 }} />
-          Filter
-        </Typography>
+        <Tooltip title="Filter" placement="right-start">
+          <FilterListIcon sx={{ mr: 0.5 }} fontSize="small" />
+        </Tooltip>
         <FormControl fullWidth sx={{ ml: 2 }}>
           <InputLabel id="filter-label"></InputLabel>
           <Select
